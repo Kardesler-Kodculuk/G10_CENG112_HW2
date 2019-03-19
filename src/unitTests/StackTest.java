@@ -18,6 +18,10 @@ class StackTest {
 	void testPush() {
 		assertEquals(true, this.testStack.push("Cat"));
 		assertEquals(false, this.testStack.push(null));
+		for (int i = 0; i < 10; i++) {
+			this.testStack.push("nyan");
+		}
+		assertEquals(true, this.testStack.push("cat"));
 	}
 
 	@Test

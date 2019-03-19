@@ -26,8 +26,8 @@ public class ExpandableStack<T> implements IStack<T> {
 	 * @return true if still has empty space or if expandable, false otherwise.
 	 */
 	private boolean checkSize() {
-		if (top == stack.length) {
-			if (stack.length + INCREMENT_SIZE > MAX_ELEMENT) {
+		if (top + 1 == stack.length) {
+			if (stack.length + INCREMENT_SIZE <= MAX_ELEMENT) {
 				T[] tempStack = (T[]) new Object[stack.length + INCREMENT_SIZE];
 				for (int i = 0; i < stack.length; i++) {
 					tempStack[i] = this.stack[i]; // Copy the old stack's elements
