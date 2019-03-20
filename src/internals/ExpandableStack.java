@@ -1,7 +1,7 @@
 /**
  * Implement a Stack that can grow if needed.
  */
-package factoryInternals;
+package internals;
 
 @SuppressWarnings("unchecked")
 public class ExpandableStack<T> implements IStack<T> {

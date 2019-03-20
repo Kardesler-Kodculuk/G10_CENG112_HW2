@@ -1,4 +1,4 @@
-package factoryInternals;
+package internals;
 
 public interface IStack<T> {
 	/**
