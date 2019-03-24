@@ -3,7 +3,7 @@ package internals;
 public class ArrayQueue<T> implements IQueue<T> {
 	
 	private int frontIndex = 0;
-	private int backIndex = 0;
+	private int backIndex = -1;
 //	private boolean initialized = false;
 	private static final int DEFAULT_CAPACITY = 10;
 	private static final int MAX_CAPACITY = 10000;
@@ -52,7 +52,10 @@ public class ArrayQueue<T> implements IQueue<T> {
 	@Override
 	public void enQueue(T newEntry) {
 //		checkInitialization();
-		ensureCapacity();
+		if(queue.length == backIndex)
+		{
+			ensureCapacity();
+		}
 		backIndex = (backIndex + 1) % queue.length;
 		queue[backIndex] = newEntry;
 	}
@@ -71,10 +74,7 @@ public class ArrayQueue<T> implements IQueue<T> {
 
 	@Override
 	public T getFront() {
-		if(!isEmpty()) {
-			return queue[frontIndex];
-		}
-		return null;
+		return queue[frontIndex];
 	}
 
 	@Override
