@@ -1,7 +1,7 @@
 package simulation;
 
 import internals.ArrayQueue;
-import parts.IProduct;
+import parts.*;
 
 public class IztechPCFactory {
 	
@@ -35,6 +35,27 @@ public class IztechPCFactory {
 	 * @param part - name of the part
 	 */
 	public void producePart(IProduct part) {
+		String typeOfObject = part.getType();
+		switch(typeOfObject) {
+		case "RAM":
+			part = new RAM();
+			break;
+		case "CPU":
+			part = new CPU();
+			break;
+		case "GraphicsCard":
+			part = new GraphicsCard();
+			break;
+		case "Motherboard":
+			part = new Motherboard();
+			break;
+		case "Cache":
+			part = new Cache();
+			break;
+		default:
+			System.out.println("Error."); //TODO: Fix This!
+		}
+		part.setState("manufactured");
 		factoryLine.enQueue(part);
 	}
 	

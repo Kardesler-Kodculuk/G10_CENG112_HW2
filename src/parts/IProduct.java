@@ -14,4 +14,13 @@ public interface IProduct {
 	 * @return true if sold, false, otherwise.
 	 */
 	public boolean isSold();
+	/**
+	 * Get the product type of the product
+	 * @return product type as a string
+	 */
+	public String getType();
+	/**
+	 * Set the state of the object.
+	 */
+	public boolean setState(String state);
 }

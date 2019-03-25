@@ -7,6 +7,7 @@ public class RAM implements IProduct {
 
 	private String state; // Manufactured, stored or sold
 	private boolean initalised;
+	private String type = "RAM";
 	
 	public RAM() {
 		this.state = "";
@@ -42,6 +43,11 @@ public class RAM implements IProduct {
 	public boolean isSold() {
 		isInitalised();
 		return state.equals("sold");
+	}
+	
+	public String getType() {
+		isInitalised();
+		return this.type;
 	}
 	
 	/**

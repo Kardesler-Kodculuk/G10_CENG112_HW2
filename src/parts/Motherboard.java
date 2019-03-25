@@ -7,7 +7,8 @@ public class Motherboard implements IProduct {
 
 	private String state; // Manufactured, stored or sold
 	private boolean initalised;
-	
+	private String type = "Motherboard";
+
 	public Motherboard() {
 		this.state = "";
 		this.initalised = true;
@@ -15,6 +16,11 @@ public class Motherboard implements IProduct {
 	
 	private void isInitalised() {
 		if (!this.initalised) throw new IllegalAccessError();
+	}
+
+	public String getType() {
+		isInitalised();
+		return this.type;
 	}
 	
 	/**

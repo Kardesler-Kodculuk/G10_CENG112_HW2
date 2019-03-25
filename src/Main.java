@@ -1,0 +1,59 @@
+import java.util.*;
+
+import parts.*;
+import simulation.Customer;
+import simulation.IztechPCFactory;
+import simulation.MarketingAnalyst;
+import simulation.StorageChief;
+public class Main {
+
+	private static int randomRangeGenerator(int rangeStart, int rangeStop) {
+		double protoInteger = Math.random();
+		int integerResult = (int) Math.floor(protoInteger * 2);
+		return integerResult;
+	}
+	
+	/**
+	 * Determine the number of runs simulation will go through.
+	 * @return the simulation size.
+	 */
+	private static int determineSimulationSize() {
+		Scanner userInput = new Scanner(System.in);
+		int simulationSize = -1;
+		while (simulationSize <= 0) {
+			System.out.println("Please enter an integer bigger than zero: ");
+			if (userInput.hasNextInt()) {
+				simulationSize = userInput.nextInt();
+			}
+		}
+		userInput.close();
+		return simulationSize;
+		
+	}
+	public static void main(String[] args) {
+		int numberOfRequests = determineSimulationSize();
+		IProduct[] products = {
+				new RAM(),
+				new CPU(),
+				new GraphicsCard(),
+				new Motherboard(),
+				new Cache()
+		};
+		MarketingAnalyst<IProduct> marketingAnalyst = new MarketingAnalyst<IProduct>();
+		IztechPCFactory pcFactory = new IztechPCFactory();
+		StorageChief storageChief = new StorageChief();
+		Customer customer = new Customer();
+		
+		for (int i = 0; i < numberOfRequests; i++) {
+			int factorySelector = randomRangeGenerator(0, 2);
+			switch(factorySelector) {
+			case 0:
+				int marketingIndex = randomRangeGenerator(0, 4);
+				IProduct product = products[marketingIndex];
+				marketingAnalyst.orderPart(product, pcFactory);
+				
+			}
+		}
+	}
+
+}

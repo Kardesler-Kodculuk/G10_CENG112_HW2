@@ -7,6 +7,7 @@ public class Cache implements IProduct {
 
 	private String state; // Manufactured, stored or sold
 	private boolean initalised;
+	private String type = "Cache";
 	
 	public Cache() {
 		this.state = "";
@@ -36,6 +37,11 @@ public class Cache implements IProduct {
 	public boolean isStored() {
 		isInitalised();
 		return state.equals("stored");
+	}
+
+	public String getType() {
+		isInitalised();
+		return this.type;
 	}
 
 	@Override
