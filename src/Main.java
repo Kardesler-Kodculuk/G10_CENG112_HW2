@@ -30,6 +30,8 @@ public class Main {
 			System.out.println("Please enter an integer bigger than zero: ");
 			if (userInput.hasNextInt()) {
 				simulationSize = userInput.nextInt();
+			} else {
+				userInput.next();
 			}
 		}
 		userInput.close();
@@ -91,6 +93,7 @@ public class Main {
 						+ product2.getType() + ", sold."), lineCount);
 				break;
 			}
+			System.out.println(output);
 		}
 	}
 

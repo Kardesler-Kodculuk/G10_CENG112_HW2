@@ -17,7 +17,8 @@ public class Motherboard implements IProduct {
 	private void isInitalised() {
 		if (!this.initalised) throw new IllegalAccessError();
 	}
-
+	
+	@Override
 	public String getType() {
 		isInitalised();
 		return this.type;

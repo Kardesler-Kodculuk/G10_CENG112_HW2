@@ -45,6 +45,7 @@ public class RAM implements IProduct {
 		return state.equals("sold");
 	}
 	
+	@Override
 	public String getType() {
 		isInitalised();
 		return this.type;

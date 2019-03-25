@@ -38,7 +38,8 @@ public class Cache implements IProduct {
 		isInitalised();
 		return state.equals("stored");
 	}
-
+	
+	@Override
 	public String getType() {
 		isInitalised();
 		return this.type;

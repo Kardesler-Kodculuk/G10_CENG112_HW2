@@ -15,6 +15,9 @@ public class StorageChief {
 	@SuppressWarnings("unchecked")
 	public StorageChief() {
 		this.warehouses = new ExpandableStack[5];
+		for (int i = 0; i < 5; i++) {
+			this.warehouses[i] = new ExpandableStack<IProduct>();
+		}
 		this.initalised = true;
 	}
 	
@@ -35,7 +38,7 @@ public class StorageChief {
 				new Motherboard(),
 				new Cache()};
 		for (int i = 0; i < stackID.length; i++) { // Traverse the array to find which object
-			if (part.getClass().equals(stackID[i].getClass())) { //Shares the same class
+			if (part.getType().equals(stackID[i].getType())) { //Shares the same class
 				return i; // Which is a parallel array with warehoues.
 			}
 		} 

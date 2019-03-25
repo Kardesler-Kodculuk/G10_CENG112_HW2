@@ -45,6 +45,7 @@ public class CPU implements IProduct {
 		return state.equals("sold");
 	}
 	
+	@Override
 	public String getType() {
 		isInitalised();
 		return this.type;
