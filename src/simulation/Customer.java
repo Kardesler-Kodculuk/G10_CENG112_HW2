@@ -15,10 +15,11 @@ public class Customer {
 	 * @return true if success, false if not
 	 */
 	public boolean buy(IProduct part, StorageChief storage) {
-		if(storage.getProduct(part) == null) { // TODO If there is an error check this
+		IProduct demandedPart = storage.getProduct(part);
+		if(demandedPart == null) {
 			return false;
 		}
-		storage.getProduct(part);
+		demandedPart.setState("sold");
 		return true;
 	}
 }

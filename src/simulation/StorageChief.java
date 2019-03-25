@@ -45,15 +45,18 @@ public class StorageChief {
 	/**
 	 * Store the item.
 	 * @param factory factory object.
+	 * @return null if factory empty, product stored if not.
 	 */
-	public void store(IztechPCFactory factory) {
+	public IProduct store(IztechPCFactory factory) {
 		isInitalised();
 		if (!factory.isEmpty()) {
 			IProduct product = factory.getProduct();
+			product.setState("stored");
 			int warehouseID = classify(product);
 			this.warehouses[warehouseID].push(product);
+			return product;
 		}
-		
+		return null;
 	}
 	
 	/**
