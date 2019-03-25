@@ -7,7 +7,7 @@ public class GraphicsCard implements IProduct {
 
 	private String state; // Manufactured, stored or sold
 	private boolean initalised;
-	private String type = "GraphicsCard";
+	private String type = "Graphics Card";
 
 	public GraphicsCard() {
 		this.state = "";

@@ -15,7 +15,7 @@ public class Main {
 	 */
 	private static int randomRangeGenerator(int rangeStart, int rangeStop) {
 		double protoInteger = Math.random();
-		int integerResult = (int) Math.floor(protoInteger * 2);
+		int integerResult = (int) Math.floor(protoInteger * ((rangeStop + 1) - rangeStart));
 		return integerResult;
 	}
 	
@@ -67,7 +67,7 @@ public class Main {
 				IProduct product0 = products[marketingIndex];
 				marketingAnalyst.orderPart(product0, factory);
 				lineCount++;
-				output = generateOutput(output, ("Marketing Anlayst requesting " 
+				output = generateOutput(output, ("Marketing analyst requesting " 
 													+ product0.getType() + ", SUCCESS, "
 													+ product0.getType() + ", manufactured."), lineCount);
 				break;
@@ -80,21 +80,23 @@ public class Main {
 														+ product1.getType() + isSuccessful
 														+ product1.getType() + ", stored."), lineCount);
 				} else {
-					output = generateOutput(output, "Storage chief failed", lineCount);
+					output = generateOutput(output, "Storage chief FAIL", lineCount);
 				}
 				break;
 			case 2:
 				int customerIndex = randomRangeGenerator(0, 4);
 				IProduct product2 = products[customerIndex];
 				boolean success2 = customer.buy(product2, storageChief);
-				String successCustomer = success2 ? " SUCCESS " : " FAIL" ;
+				String successCustomer = success2 ? " SUCCESS " : " FAIL " ;
+				String isSold = success2 ? " sold" : " not sold";
+				lineCount++;
 				output = generateOutput(output, ("Customer requesting " 
 						+ product2.getType() + successCustomer
-						+ product2.getType() + ", sold."), lineCount);
+						+ product2.getType() + isSold), lineCount);
 				break;
 			}
-			System.out.println(output);
 		}
+		System.out.println(output);
 	}
 
 }

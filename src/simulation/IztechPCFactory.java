@@ -43,7 +43,7 @@ public class IztechPCFactory {
 		case "CPU":
 			part = new CPU();
 			break;
-		case "GraphicsCard":
+		case "Graphics Card":
 			part = new GraphicsCard();
 			break;
 		case "Motherboard":
