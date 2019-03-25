@@ -11,7 +11,7 @@ public class MarketingAnalyst<T> {
 	 * Orders to the IztechPCFactory for produce
 	 * @param part - name of the part
 	 */
-	public static void orderPart(IProduct part, IztechPCFactory factory) {
+	public void orderPart(IProduct part, IztechPCFactory factory) {
 		factory.producePart(part);
 	
 	}
