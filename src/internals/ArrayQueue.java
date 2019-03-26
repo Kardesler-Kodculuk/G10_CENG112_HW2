@@ -33,7 +33,7 @@ public class ArrayQueue<T> implements IQueue<T> {
 	 * Expands the size of the queue when the queue is full
 	 */
 	private void ensureCapacity() {
-		if((backIndex + 1) % queue.length == frontIndex && queue.length <= MAX_CAPACITY)
+		if((backIndex + 1) % queue.length == 0 && queue.length != MAX_CAPACITY)
 		{
 			@SuppressWarnings("unchecked")
 			T[] newArray = (T[]) new Object[queue.length + 10];
