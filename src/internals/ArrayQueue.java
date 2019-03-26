@@ -52,7 +52,7 @@ public class ArrayQueue<T> implements IQueue<T> {
 	@Override
 	public void enQueue(T newEntry) {
 //		checkInitialization();
-		if(queue.length == backIndex)
+		if(queue.length == backIndex + 1)
 		{
 			ensureCapacity();
 		}
