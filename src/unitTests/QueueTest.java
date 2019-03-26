@@ -31,8 +31,12 @@ class QueueTest {
 
 	@Test
 	void testEnQueue() {
-		for(int i = 0; i < 100; i++) {
+		/*for(int i = 0; i < 100; i++) {
 			queue.enQueue(ram);
+		} */
+		ArrayQueue<String> que = new ArrayQueue<String>();
+		for (int i = 0; i < 100; i++) {
+			que.enQueue(((Integer) i).toString());
 		}
 	}
 

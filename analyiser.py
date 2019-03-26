@@ -1,18 +1,3 @@
-class Stack:
-    def __init__(self):
-        self.stack_list = []
-
-    def push(self, new_element):
-        self.stack_list.append(new_element)
-    def pop(self):
-        return self.stack_list.pop()
-
-    def peek(self):
-        return self.stack_list[-1]
-
-    def is_empty(self):
-        return self.stack_list == []
-
 def determine_component(string):
     components = ["RAM", "CPU", "Graphics Card", "Motherboard", "Cache"]
     for component in components:
@@ -33,26 +18,29 @@ def determine_result(string):
 
 class Queue:
     def __init__(self):
-        self.__head = 0
-        self.__queue = []
+        self.head = 0
+        self.queue = []
 
     def enqueue(self, new_element):
-        self.__queue.append(new_element)
+        self.queue.append(new_element)
 
     def dequeue(self):
-        object_ = self.__queue[self.__head]
-        self.__head += 1
+        object_ = self.queue[self.head]
+        self.head += 1
         return object_
 
     def next_item(self):
-        return self.__queue[self.__head]
+        return self.queue[self.head]
 
     def is_empty(self):
-        return len(self.__queue) == self.__head
+        return len(self.queue) == self.head
 
     def to_string(self):
-        print(self.__queue)
-        print(self.__head)
+        for i in range(0, len(self.queue)):
+            if (i == self.head):
+                print("*", i, self.queue[i])
+                continue
+            print(i, self.queue[i])
 
 storage_addition = Queue()
 counts = {
@@ -82,7 +70,6 @@ for line in data:
                 print("FAILURE IN STORAGE CHIEF: Nonexistent element")
                 break
         else:
-            '''
             if component != storage_addition.next_item():
                 print(line)
                 print(component)
@@ -91,14 +78,12 @@ for line in data:
                 fail = True
                 print("FAILURE IN STORAGE CHIEF: Mismatch")
                 break
-                pass
             else:
-            '''
-            comp = storage_addition.dequeue()
-            counts[comp] += 1
-            if result != "SUCCESS":
-                print("FAILURE IN STORAGE CHIEF: Wrong reaction")
-                break
+                comp = storage_addition.dequeue()
+                counts[comp] += 1
+                if result != "SUCCESS":
+                    print("FAILURE IN STORAGE CHIEF: Wrong reaction")
+                    break
     elif factory_component == "Customer":
         if counts[component] >= 1:
             if result != "SUCCESS":
