@@ -4,7 +4,6 @@ public class NewCircularQueue<T> implements IQueue<T> {
 
 	private final static int DEFAULT_SIZE = 10;
 	private final static int MAX_SIZE = 10000;
-	private int size;
 	T[] queue;
 	private int frontIndex = 0;
 	private int backIndex = -1;
@@ -21,14 +20,14 @@ public class NewCircularQueue<T> implements IQueue<T> {
 	}
 
 	private void ensureCapacity() {
-		if(size == MAX_SIZE)
+		if(queue.length == MAX_SIZE)
 		{
 			throw new IllegalStateException("Reached max size");
 		}
 		else if((backIndex + 2) % queue.length == frontIndex % queue.length) 
 		{
 			@SuppressWarnings("unchecked")
-			T[] newQueue = (T[]) new Object[size + 10];
+			T[] newQueue = (T[]) new Object[queue.length + 10];
 			for(int i = 0; i < queue.length; i++) 
 			{
 				newQueue[i] = queue[i];
@@ -85,7 +84,8 @@ public class NewCircularQueue<T> implements IQueue<T> {
 
 	@Override
 	public void clear() {
-		while(frontIndex != backIndex)
+
+		while(queue[frontIndex] != null)
 		{
 			deQueue();
 		}
