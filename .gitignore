@@ -1,3 +1,13 @@
 # Compiled class file
 *.class
 /bin/
+
+\.coverage
+
+__pycache__/analyiser\.cpython-36\.pyc
+
+main\.jar
+
+output\.csv
+
+output\.txt
