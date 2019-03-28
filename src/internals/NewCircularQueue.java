@@ -5,13 +5,15 @@ public class NewCircularQueue<T> implements IQueue<T> {
 	private final static int DEFAULT_SIZE = 10;
 	private final static int MAX_SIZE = 10000;
 	T[] queue;
-	private int frontIndex = 0;
-	private int backIndex = -1;
+	private int frontIndex;
+	private int backIndex;
 	
 	
 	
 	public NewCircularQueue() {
 		this(DEFAULT_SIZE);
+		frontIndex = 0;
+		backIndex = -1;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -30,9 +32,13 @@ public class NewCircularQueue<T> implements IQueue<T> {
 			T[] newQueue = (T[]) new Object[queue.length + 10];
 			for(int i = 0; i < queue.length; i++) 
 			{
-				newQueue[i] = queue[i];
+				newQueue[i] = queue[frontIndex % queue.length];
+				frontIndex++;
 			}
+
 			queue = newQueue;
+			frontIndex = 0;
+			backIndex = queue.length - 12;
 		}
 	}
 	
