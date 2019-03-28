@@ -26,19 +26,19 @@ public class NewCircularQueue<T> implements IQueue<T> {
 		{
 			throw new IllegalStateException("Reached max size");
 		}
-		else if((backIndex + 2) % queue.length == frontIndex % queue.length) 
+		else if((backIndex + 2) % queue.length == frontIndex % queue.length) // if close to full 
 		{
 			@SuppressWarnings("unchecked")
-			T[] newQueue = (T[]) new Object[queue.length + 10];
-			for(int i = 0; i < queue.length; i++) 
+			T[] newQueue = (T[]) new Object[queue.length + 10]; 
+			for(int i = 0; i < queue.length; i++) // moving entries to the expanded queue
 			{
 				newQueue[i] = queue[frontIndex % queue.length];
 				frontIndex++;
 			}
 
 			queue = newQueue;
-			frontIndex = 0;
-			backIndex = queue.length - 12;
+			frontIndex = 0; // setting frontIndex for expanded queue
+			backIndex = queue.length - 12; // setting backIndex for expanded queue
 		}
 	}
 	
@@ -58,10 +58,7 @@ public class NewCircularQueue<T> implements IQueue<T> {
 		{
 			T removedItem = queue[frontIndex];
 			queue[frontIndex] = null;
-			if(queue[(frontIndex + 1) % queue.length] != null)
-			{
-				frontIndex = (frontIndex + 1) % queue.length;
-			}
+			frontIndex = (frontIndex + 1) % queue.length;
 			return removedItem;
 		}
 		else
