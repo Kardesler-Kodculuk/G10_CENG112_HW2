@@ -45,7 +45,12 @@ public class Main {
 	}
 	
 	public static void main(String[] args) {
-		int numberOfRequests = determineSimulationSize();
+		int numberOfRequests;
+		if (args.length > 0) {
+			numberOfRequests = Integer.parseInt(args[0]);
+		} else {
+			numberOfRequests = determineSimulationSize();
+		}
 		IProduct[] products = {
 				new RAM(),
 				new CPU(),
@@ -67,7 +72,7 @@ public class Main {
 				IProduct product0 = products[marketingIndex];
 				marketingAnalyst.orderPart(product0, factory);
 				lineCount++;
-				output = generateOutput(output, ("Marketing analyst requesting " 
+				output = generateOutput(output, ("Marketing Analyst requesting " 
 													+ product0.getType() + ", SUCCESS, "
 													+ product0.getType() + ", manufactured."), lineCount);
 				break;
@@ -76,11 +81,11 @@ public class Main {
 				String isSuccessful = (product1 != null) ? " SUCCESS " : " FAIL ";
 				lineCount++;
 				if (product1 != null) {
-					output = generateOutput(output, ("Storage chief requesting " 
+					output = generateOutput(output, ("Storage Chief requesting " 
 														+ product1.getType() + isSuccessful
 														+ product1.getType() + ", stored."), lineCount);
 				} else {
-					output = generateOutput(output, "Storage chief FAIL", lineCount);
+					output = generateOutput(output, "Storage Chief FAIL", lineCount);
 				}
 				break;
 			case 2:

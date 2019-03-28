@@ -33,7 +33,7 @@ public class ArrayQueue<T> implements IQueue<T> {
 	 * Expands the size of the queue when the queue is full
 	 */
 	private void ensureCapacity() {
-		if((backIndex + 1) % queue.length == 0 && queue.length != MAX_CAPACITY)
+		if(queue.length != MAX_CAPACITY)
 		{
 			@SuppressWarnings("unchecked")
 			T[] newArray = (T[]) new Object[queue.length + 10];
@@ -41,6 +41,12 @@ public class ArrayQueue<T> implements IQueue<T> {
 			{
 				newArray[i] = queue[i];
 			}
+			
+			for (int j = frontIndex; j < queue.length;  j++) {
+				newArray[j + 10] = queue[j];
+				newArray[j] = null;
+			}
+			frontIndex = frontIndex + 10;
 			queue = newArray;
 		}
 		else
@@ -52,7 +58,7 @@ public class ArrayQueue<T> implements IQueue<T> {
 	@Override
 	public void enQueue(T newEntry) {
 //		checkInitialization();
-		if(queue.length == backIndex + 1)
+		if((backIndex + 2) % queue.length == frontIndex)
 		{
 			ensureCapacity();
 		}

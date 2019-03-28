@@ -42,14 +42,23 @@ class QueueTest {
 
 	@Test
 	void testDeQueue() {
-		assertEquals(null, queue.deQueue());
+/*		assertEquals(null, queue.deQueue());
 		queue.enQueue(ram);
 		queue.enQueue(cache);
 		queue.enQueue(cpu);
 		assertEquals(ram, queue.deQueue());
 		assertEquals(cache, queue.deQueue());
 		assertEquals(cpu, queue.deQueue());
-		assertEquals(null, queue.deQueue());
+		assertEquals(null, queue.deQueue()); */
+		ArrayQueue<String> lolcat = new ArrayQueue<String>();
+		for (int i = 0; i < 9; i++) {
+			lolcat.enQueue(((Integer)i).toString());
+		}
+		for (int j = 0; j < 4; j++) {
+			lolcat.deQueue();
+		}
+		for (int k = 10; k < 40; k++)
+			lolcat.enQueue(((Integer) k).toString());
 	}
 
 	@Test

@@ -1,11 +1,13 @@
 package simulation;
 
 import internals.ArrayQueue;
+import internals.IQueue;
+import internals.NyanQueue;
 import parts.*;
 
 public class IztechPCFactory {
 	
-	ArrayQueue<IProduct> factoryLine = new ArrayQueue<IProduct>();
+	IQueue<IProduct> factoryLine = new NyanQueue<IProduct>();
 	
 	public IztechPCFactory() {
 		
