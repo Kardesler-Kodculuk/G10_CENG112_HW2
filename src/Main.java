@@ -44,6 +44,31 @@ public class Main {
 		return outputString;
 	}
 	
+	private static String generateReport(Customer customer, IztechPCFactory factory, StorageChief masterChief) {
+		int[] factoryCounts = factory.itemCounts();
+		String str = "";
+		str += "\nREPORT:\n";
+		str += "Amount of RAM in Factory line: " + ((Integer) factoryCounts[0]).toString() + "\n";
+		str += "Amount of CPU in Factory line: " + ((Integer) factoryCounts[1]).toString() +"\n";
+		str += "Amount of Graphics Card in Factory line: " + ((Integer) factoryCounts[2]).toString() + "\n";
+		str += "Amount of Motherboard in Factory line: " + ((Integer) factoryCounts[3]).toString() + "\n";
+		str += "Amount of Cache in Factory line: " + ((Integer) factoryCounts[4]).toString() + "\n\n";
+
+		str += "Amount of RAM in Warehouse: " + masterChief.getWarehouseCount("RAM") + "\n";
+		str += "Amount of CPU in Warehouse: " + masterChief.getWarehouseCount("CPU") +"\n";
+		str += "Amount of Graphics Card in Warehouse: " + masterChief.getWarehouseCount("Graphics Card") + "\n";
+		str += "Amount of Motherboard in Warehouse: " + masterChief.getWarehouseCount("Motherboard") + "\n";
+		str += "Amount of Cache in Warehouse: " + masterChief.getWarehouseCount("Cache") + "\n\n";
+		
+		str += "\nREPORT:\n";
+		str += "Amount of RAM in Factory line: " + customer.getItemCounts("RAM") + "\n";
+		str += "Amount of CPU in Factory line: " + customer.getItemCounts("CPU") +"\n";
+		str += "Amount of Graphics Card in Factory line: " + customer.getItemCounts("Graphics Card") + "\n";
+		str += "Amount of Motherboard in Factory line: " + customer.getItemCounts("Motherboard") + "\n";
+		str += "Amount of Cache in Factory line: " + customer.getItemCounts("Cache") + "\n\n";
+		return str;
+	}
+	
 	public static void main(String[] args) {
 		int numberOfRequests;
 		if (args.length > 0) {
@@ -102,6 +127,7 @@ public class Main {
 			}
 		}
 		System.out.println(output);
+		System.out.println(generateReport(customer, factory, storageChief));
 	}
 
 }
