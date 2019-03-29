@@ -4,7 +4,7 @@ public class NewCircularQueue<T> implements IQueue<T> {
 
 	private final static int DEFAULT_SIZE = 10;
 	private final static int MAX_SIZE = 10000;
-	T[] queue;
+	private T[] queue;
 	private int frontIndex;
 	private int backIndex;
 	
