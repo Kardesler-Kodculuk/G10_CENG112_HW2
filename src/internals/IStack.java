@@ -26,4 +26,10 @@ public interface IStack<T> {
 	 * @return true if empty, false, otherwise.
 	 */
 	public boolean isEmpty();
+	
+	/**
+	 * Get the current size of the stack
+	 * @return the current size.
+	 */
+	public int getSize();
 }

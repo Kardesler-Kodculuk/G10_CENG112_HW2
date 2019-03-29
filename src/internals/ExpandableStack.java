@@ -100,4 +100,10 @@ public class ExpandableStack<T> implements IStack<T> {
 	public boolean isEmpty() {
 		return top == -1;
 	}
+
+	@Override
+	public int getSize() {
+		isInitalised();
+		return this.top + 1;
+	}
 }
