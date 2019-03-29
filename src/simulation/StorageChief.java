@@ -76,4 +76,12 @@ public class StorageChief {
 		return warehouses[warehouseID].pop();
 		
 	}
+	
+	public int[] getWarehouseCount() {
+		int[] warehouseCounts = {0,0,0,0,0}; // RAM, CPU, Graphics Card, Motherboard, Cache
+		for (int i = 0; i < 5; i++) {
+			warehouseCounts[i] = warehouses[i].getSize();
+		}
+		return warehouseCounts;
+	}
 }
