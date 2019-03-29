@@ -26,4 +26,14 @@ public interface IQueue<T>
 	 * Clears the whole queue
 	 */
 	public void clear();
+	/**
+	 * Gets length of the queue
+	 * @return length of the queue by type int
+	 */
+	public int getLength();
+	/**
+	 * Returns a copy of the queue
+	 * @return queue of type T
+	 */
+	public T[] getArray();
 }

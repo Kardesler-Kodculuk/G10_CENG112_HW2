@@ -93,5 +93,17 @@ public class NewCircularQueue<T> implements IQueue<T> {
 			deQueue();
 		}
 	}
+	
+	@Override
+	public int getLength() {
+		int tempLength = queue.length;
+		return tempLength;
+	}
+	
+	@Override
+	public T[] getArray() {
+		T[] tempArray = queue;
+		return tempArray;
+	}
 
 }

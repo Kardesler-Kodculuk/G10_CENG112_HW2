@@ -1,9 +1,7 @@
 package simulation;
 
-import internals.ArrayQueue;
 import internals.IQueue;
 import internals.NewCircularQueue;
-import internals.NyanQueue;
 import parts.*;
 
 public class IztechPCFactory {
@@ -60,6 +58,45 @@ public class IztechPCFactory {
 		}
 		part.setState("manufactured");
 		factoryLine.enQueue(part);
+	}
+	
+	/**
+	 * It returns an array with itemCounts
+	 * index 0 -> "RAM" count
+	 * index 1 -> "CPU" count
+	 * index 2 -> "Graphics Card"
+	 * index 3 -> "Motherboard"
+	 * index 4 -> "Cache"
+	 * @return an array with itemCounts
+	 */
+	public int[] itemCounts() {
+		IProduct[] queue;
+		queue = factoryLine.getArray();
+		int[] countArray;
+		countArray = new int[5];
+		for(int i = 0; i < factoryLine.getLength(); i++)
+		{
+			String part = queue[i].getType();
+			switch(part) 
+			{
+			case "RAM": // TODO if there is an error you should check this 
+				countArray[0]++;
+				break;
+			case "CPU":
+				countArray[1]++;
+				break;
+			case "Graphics Card":
+				countArray[2]++;
+				break;
+			case "Motherboard":
+				countArray[3]++;
+				break;
+			case "Cache":
+				countArray[4]++;
+				break;
+			}
+		}
+		return countArray;
 	}
 	
 	
