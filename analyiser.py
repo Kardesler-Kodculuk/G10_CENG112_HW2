@@ -160,6 +160,8 @@ class Test:
 
             # Parse the line to determine which component did what with what part
             factory_component = Test.determine_factory(line)
+            if factory_component is None:
+                continue
             component = Test.determine_component(line)
             result = Test.determine_result(line)
             component_mentions[factory_component] += 1
@@ -182,12 +184,12 @@ class Test:
                         print("FAILURE IN STORAGE CHIEF: Mismatch")
                         break
                     else:
-                        comp = storage_addition.dequeue()
-                        counts[comp] += 1
                         if result != "SUCCESS":
                             print("Error at the line: ", line)
                             print("FAILURE IN STORAGE CHIEF: Wrong reaction, expected SUCCESS got FAIL instead.")
                             break
+                        comp = storage_addition.dequeue()
+                        counts[comp] += 1
             elif factory_component == "Customer":
                 if counts[component] >= 1:
                     if result != "SUCCESS":
@@ -214,23 +216,32 @@ class Test:
             if not components[0].endswith("Sold"):
                 component = re.search(r"\w+(?=\s(in)\b)", line).group(0)
                 factory_simulation = re.search(r"\w+(?=(:))", line).group(0)
-                if factory_simulation == "Line":
+                if factory_simulation == "line":
                     if component == "Card":
                         component = "Graphics Card"
                     check = count == storage_addition.count(component)
+                    if not check:
+                        print("Comp")
                 else:
                     if component == "Card":
                         component = "Graphics Card"
                     check = count == counts[component]
+                    if not check:
+                        print("Stor")
+                        print(counts)
+                        print(component)
+                        print(counts[component])
+                        print(count)
             else:
                 component = re.search(r"\w+(?=\s(Sold)\b)", line).group(0)
                 if component == "Card":
                     component = "Graphics Card"
                 check = count == component_sold_counts[component]
-
+                if not check:
+                    print("Lol.")
             if not check:
                 print("REPORT ERR.")
-                return storage_addition,
+                return str(len(storage_addition)), component_mentions
 
 
         if fail:
@@ -246,5 +257,5 @@ if __name__ == "__main__":
     test_result: str = Test.main("output.txt")
     if test_result is not None:
         file = open("log.txt", "a")
-        file.write(test_result + "\n")
+        file.write(str(test_result) + "\n")
         file.close()

@@ -46,6 +46,7 @@ public class Main {
 	
 	private static String generateReport(Customer customer, IztechPCFactory factory, StorageChief masterChief) {
 		int[] factoryCounts = factory.itemCounts();
+		masterChief.initiliseWarehouseCounts();
 		String str = "";
 		str += "\nREPORT:\n";
 		str += "Amount of RAM in Factory line: " + ((Integer) factoryCounts[0]).toString() + "\n";

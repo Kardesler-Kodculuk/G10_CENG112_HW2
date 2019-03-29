@@ -1,2 +1,7 @@
 293
 293
+('3', {'Marketing Analyst': 3, 'Customer': 2, 'Storage Chief': 5})
+('3', {'Marketing Analyst': 3, 'Customer': 2, 'Storage Chief': 5})
+('3', {'Marketing Analyst': 3, 'Customer': 2, 'Storage Chief': 5})
+('3', {'Marketing Analyst': 3, 'Customer': 2, 'Storage Chief': 5})
+('3', {'Marketing Analyst': 3, 'Customer': 2, 'Storage Chief': 5})
