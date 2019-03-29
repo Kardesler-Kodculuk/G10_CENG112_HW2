@@ -1,12 +1,12 @@
 package simulation;
 
 import internals.IQueue;
-import internals.NewCircularQueue;
+import internals.ArrayQueue;
 import parts.*;
 
 public class IztechPCFactory {
 	
-	IQueue<IProduct> factoryLine = new NewCircularQueue<IProduct>();
+	IQueue<IProduct> factoryLine = new ArrayQueue<IProduct>();
 	
 	public IztechPCFactory() {
 		

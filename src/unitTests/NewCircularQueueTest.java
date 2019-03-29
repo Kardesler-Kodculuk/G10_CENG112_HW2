@@ -5,18 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import internals.NewCircularQueue;
+import internals.ArrayQueue;
 import parts.*;
 
 class NewCircularQueueTest {
 
-	private NewCircularQueue<IProduct> queue;
+	private ArrayQueue<IProduct> queue;
 	private IProduct ram; IProduct cpu; IProduct cache; IProduct GraphicsCard; IProduct Motherboard;
 	
 
 	@BeforeEach
 	void setUp() throws Exception {
-		queue = new NewCircularQueue<IProduct>();
+		queue = new ArrayQueue<IProduct>();
 		ram = new RAM();
 		cpu = new CPU();
 		cache = new Cache();
@@ -34,7 +34,7 @@ class NewCircularQueueTest {
 		/*for(int i = 0; i < 100; i++) {
 			queue.enQueue(ram);
 		} */
-		NewCircularQueue<String> que = new NewCircularQueue<String>();
+		ArrayQueue<String> que = new ArrayQueue<String>();
 		for (int i = 0; i < 100; i++) {
 			que.enQueue(((Integer) i).toString());
 		}
@@ -50,7 +50,7 @@ class NewCircularQueueTest {
 		assertEquals(cache, queue.deQueue());
 		assertEquals(cpu, queue.deQueue());
 		assertEquals(null, queue.deQueue()); */
-		NewCircularQueue<String> lolcat = new NewCircularQueue<String>();
+		ArrayQueue<String> lolcat = new ArrayQueue<String>();
 		for (int i = 0; i < 9; i++) {
 			lolcat.enQueue(((Integer)i).toString());
 		}

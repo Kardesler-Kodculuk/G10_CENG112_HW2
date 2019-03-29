@@ -1,101 +1,112 @@
 package internals;
 
 public class ArrayQueue<T> implements IQueue<T> {
-	
-	private int frontIndex = 0;
-	private int backIndex = -1;
-//	private boolean initialized = false;
-	private static final int DEFAULT_CAPACITY = 10;
-	private static final int MAX_CAPACITY = 10000;
+
+	private final static int DEFAULT_SIZE = 10;
+	private final static int MAX_SIZE = 10000;
 	private T[] queue;
+	private int frontIndex;
+	private int backIndex;
 	
 	
-	/**
-	 * Constructs a queue with default capacity of 10
-	 */
-	@SuppressWarnings("unchecked")
+	
 	public ArrayQueue() {
-		queue = (T[]) new Object[DEFAULT_CAPACITY];
-//		initialized = true;
+		this(DEFAULT_SIZE);
+		frontIndex = 0;
+		backIndex = -1;
 	}
 	
-	/*
-	 * I think this method is not necessary actually pointless unless we have a static method?
-	 */
-//	private void checkInitialization() {
-//		if(!initialized)
-//		{
-//			throw new IllegalStateException("Not initialized");
-//		}
-//	}
+	@SuppressWarnings("unchecked")
+	public ArrayQueue(int size) {
+		queue = (T[]) new Object[size];
+	}
 
-	/**
-	 * Expands the size of the queue when the queue is full
-	 */
 	private void ensureCapacity() {
-		if(queue.length != MAX_CAPACITY)
+		if(queue.length == MAX_SIZE)
+		{
+			throw new IllegalStateException("Reached max size");
+		}
+		else if((backIndex + 2) % queue.length == frontIndex % queue.length) // if close to full 
 		{
 			@SuppressWarnings("unchecked")
-			T[] newArray = (T[]) new Object[queue.length + 10];
-			for(int i = 0; i < queue.length; i++)
+			T[] newQueue = (T[]) new Object[queue.length + 10]; 
+			for(int i = 0; i < queue.length; i++) // moving entries to the expanded queue
 			{
-				newArray[i] = queue[i];
+				newQueue[i] = queue[frontIndex % queue.length];
+				frontIndex++;
 			}
-			
-			for (int j = frontIndex; j < queue.length;  j++) {
-				newArray[j + 10] = queue[j];
-				newArray[j] = null;
-			}
-			frontIndex = frontIndex + 10;
-			queue = newArray;
-		}
-		else
-		{
-			throw new IllegalStateException("Reached max capacity");
+
+			queue = newQueue;
+			frontIndex = 0; // setting frontIndex for expanded queue
+			backIndex = queue.length - 12; // setting backIndex for expanded queue
 		}
 	}
+	
 	
 	@Override
 	public void enQueue(T newEntry) {
-//		checkInitialization();
-		if((backIndex + 2) % queue.length == frontIndex)
-		{
-			ensureCapacity();
-		}
+		ensureCapacity();
 		backIndex = (backIndex + 1) % queue.length;
 		queue[backIndex] = newEntry;
+
+		
 	}
 
 	@Override
 	public T deQueue() {
-//		checkInitialization();
-		if(!isEmpty()) {
-			T tempEntry = (T) queue[frontIndex];
+		if(!isEmpty()) 
+		{
+			T removedItem = queue[frontIndex];
 			queue[frontIndex] = null;
 			frontIndex = (frontIndex + 1) % queue.length;
-			return tempEntry;
+			return removedItem;
 		}
-		return null;
+		else
+		{
+			return null;
+		}
 	}
 
 	@Override
 	public T getFront() {
-		return queue[frontIndex];
+		T frontEntry = queue[frontIndex];
+		return frontEntry;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		if(queue[frontIndex] == null) {
+		if(queue[frontIndex] == null)
+		{
 			return true;
 		}
-		return false;
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override
 	public void clear() {
-		for(int i = 0; i < queue.length; i++) {
-			queue[i] = null;
+
+		while(queue[frontIndex] != null)
+		{
+			deQueue();
 		}
 	}
+	
+	@Override
+	public int getLength() {
+		int tempLength = queue.length;
+		return tempLength;
+	}
+	
+//	public IProduct[] getArray() {
+//		IProduct[] tempArray = new IProduct[getLength()];
+//		for(int i = 0; i < getLength(); i++)
+//		{
+//			tempArray[i] = (IProduct) deQueue();
+//		}
+//		return tempArray;
+//	}
 
 }
