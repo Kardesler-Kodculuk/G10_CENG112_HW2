@@ -2,7 +2,7 @@
 # You need to redirect your console output to a file.
 # This should work with the output type specified at homework specification
 from typing import Dict, Tuple
-
+import re
 
 class Queue:
     """
@@ -51,6 +51,10 @@ class Queue:
             return object_
         else:
             return None
+
+    def count(self, item: object) -> int:
+        working_list = self.queue[self.head:]
+        return working_list.count(item)
 
     @property
     def next_item(self):
@@ -135,14 +139,23 @@ class Test:
             "Cache": 0
         }
 
+        component_sold_counts: Dict[str, int] = {
+            "RAM": 0,
+            "CPU": 0,
+            "Graphics Card": 0,
+            "Motherboard": 0,
+            "Cache": 0
+        }
         # File operations
         fail = False
         file = open(file_name, "r")
-        data = file.read().split("\n")
+        data = file.read().split("REPORT:\n")
+        report = data[1].split("\n")
+        data = data[0].split("\n")
         file.close()
         component_mentions: Dict[str, int] = {"Marketing Analyst": 0, "Customer": 0, "Storage Chief": 0}
         for line in data:  # Loop through the lines.
-            if line == "":  # Should the line be empty, means the last line if configured properly.
+            if line == "" :  # Should the line be empty, means the last line if configured properly.
                 break
 
             # Parse the line to determine which component did what with what part
@@ -185,6 +198,7 @@ class Test:
                         break
                     else:
                         counts[component] -= 1
+                        component_sold_counts[component] += 1
                 else:
                     if result != "FAIL":
                         fail = True
@@ -192,12 +206,32 @@ class Test:
                         print("FAILURE IN CUSTOMER: Wrong reaction - Expected FAIL, got SUCCESS instead.")
                         break
 
+        for line in report:
+            components = line.split(":")
+            count = int(components[1])
+            if not components[0].endswith("Sold"):
+                component = re.search("\w+(?=\s(in))\b", line)
+                factory_simulation = re.search("\w+(?=\s(:))\b", line)
+                if factory_simulation == "Line":
+                    check = count == storage_addition.count(component)
+                else:
+                    check = count == counts[component]
+            else:
+                component = re.search("\w+(?=\s(Sold))\b", line)
+                check = count == component_sold_counts[component]
+
+            if not check:
+                print("REPORT ERR.")
+                return str(len(storage_addition)), component_mentions
+
+
         if fail:
             print("ERRORS DETECTED IN SYSTEM")
             return line.split(".")[0]
         else:
             print("SUCCESSFUL INTEGRATION TESTING")
             return None
+
 
 
 if __name__ == "__main__":
