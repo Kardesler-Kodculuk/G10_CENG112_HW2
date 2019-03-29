@@ -31,9 +31,4 @@ public interface IQueue<T>
 	 * @return length of the queue by type int
 	 */
 	public int getLength();
-	/**
-	 * Returns a copy of the queue
-	 * @return queue of type T
-	 */
-	public T[] getArray();
 }
