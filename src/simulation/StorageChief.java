@@ -10,7 +10,7 @@ public class StorageChief {
 
 	private IStack<IProduct>[] warehouses;
 	private boolean initalised = false; 
-	
+	private int[] warehouseCounts;
 	
 	@SuppressWarnings("unchecked")
 	public StorageChief() {
@@ -18,6 +18,7 @@ public class StorageChief {
 		for (int i = 0; i < 5; i++) {
 			this.warehouses[i] = new ExpandableStack<IProduct>();
 		}
+		this.warehouseCounts = new int[5]; 
 		this.initalised = true;
 	}
 	
@@ -77,11 +78,39 @@ public class StorageChief {
 		
 	}
 	
-	public int[] getWarehouseCount() {
-		int[] warehouseCounts = {0,0,0,0,0}; // RAM, CPU, Graphics Card, Motherboard, Cache
+	/**
+	 * Initilise the warehouse counts.
+	 * Number of arrays shall be five, five shall be the number
+	 * Thy should array, and the number of arraying shall be five,
+	 * Six thou shall not array, neither array thou to four, excepting
+	 * That thou then proceed to five.
+	 */
+	public void initiliseWarehouseCounts() {
+		// RAM, CPU, Graphics Card, Motherboard, Cache
 		for (int i = 0; i < 5; i++) {
 			warehouseCounts[i] = warehouses[i].getSize();
 		}
-		return warehouseCounts;
+	}
+	
+	/**
+	 * Return the warehouses' counts.
+	 * @param warehouseType - Type of the warehouse whose count shall be returned.
+	 * @return The number of elements inside Stack.
+	 */
+	public int getWarehouseCount(String warehouseType) {
+		switch(warehouseType) {
+		case "RAM":
+			return warehouseCounts[0];
+		case "CPU":
+			return warehouseCounts[1];
+		case "Graphics Card":
+			return warehouseCounts[2];
+		case "Motherboard":
+			return warehouseCounts[3];
+		case "Cache":
+			return warehouseCounts[4];
+		default:
+			return -1;
+		}
 	}
 }
