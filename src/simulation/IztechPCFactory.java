@@ -70,31 +70,33 @@ public class IztechPCFactory {
 	 * @return an array with itemCounts
 	 */
 	public int[] itemCounts() {
-		IProduct[] queue;
-		queue = factoryLine.getArray();
 		int[] countArray;
 		countArray = new int[5];
 		for(int i = 0; i < factoryLine.getLength(); i++)
 		{
-			String part = queue[i].getType();
-			switch(part) 
+			if(!factoryLine.isEmpty())
 			{
-			case "RAM": // TODO if there is an error you should check this 
-				countArray[0]++;
-				break;
-			case "CPU":
-				countArray[1]++;
-				break;
-			case "Graphics Card":
-				countArray[2]++;
-				break;
-			case "Motherboard":
-				countArray[3]++;
-				break;
-			case "Cache":
-				countArray[4]++;
-				break;
+				String part = factoryLine.deQueue().getType();
+				switch(part)
+				{
+				case "RAM": // TODO if there is an error you should check this 
+					countArray[0]++;
+					break;
+				case "CPU":
+					countArray[1]++;
+					break;
+				case "Graphics Card":
+					countArray[2]++;
+					break;
+				case "Motherboard":
+					countArray[3]++;
+					break;
+				case "Cache":
+					countArray[4]++;
+					break;
+				}
 			}
+
 		}
 		return countArray;
 	}

@@ -100,10 +100,13 @@ public class NewCircularQueue<T> implements IQueue<T> {
 		return tempLength;
 	}
 	
-	@Override
-	public T[] getArray() {
-		T[] tempArray = queue;
-		return tempArray;
-	}
+//	public IProduct[] getArray() {
+//		IProduct[] tempArray = new IProduct[getLength()];
+//		for(int i = 0; i < getLength(); i++)
+//		{
+//			tempArray[i] = (IProduct) deQueue();
+//		}
+//		return tempArray;
+//	}
 
 }
