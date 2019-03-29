@@ -207,22 +207,30 @@ class Test:
                         break
 
         for line in report:
+            if line == "":
+                continue
             components = line.split(":")
             count = int(components[1])
             if not components[0].endswith("Sold"):
-                component = re.search("\w+(?=\s(in))\b", line)
-                factory_simulation = re.search("\w+(?=\s(:))\b", line)
+                component = re.search(r"\w+(?=\s(in)\b)", line).group(0)
+                factory_simulation = re.search(r"\w+(?=(:))", line).group(0)
                 if factory_simulation == "Line":
+                    if component == "Card":
+                        component = "Graphics Card"
                     check = count == storage_addition.count(component)
                 else:
+                    if component == "Card":
+                        component = "Graphics Card"
                     check = count == counts[component]
             else:
-                component = re.search("\w+(?=\s(Sold))\b", line)
+                component = re.search(r"\w+(?=\s(Sold)\b)", line).group(0)
+                if component == "Card":
+                    component = "Graphics Card"
                 check = count == component_sold_counts[component]
 
             if not check:
                 print("REPORT ERR.")
-                return str(len(storage_addition)), component_mentions
+                return storage_addition,
 
 
         if fail:

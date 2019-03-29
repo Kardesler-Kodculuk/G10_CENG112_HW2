@@ -54,18 +54,17 @@ public class Main {
 		str += "Amount of Motherboard in Factory line: " + ((Integer) factoryCounts[3]).toString() + "\n";
 		str += "Amount of Cache in Factory line: " + ((Integer) factoryCounts[4]).toString() + "\n\n";
 
-		str += "Amount of RAM in Warehouse: " + masterChief.getWarehouseCount("RAM") + "\n";
-		str += "Amount of CPU in Warehouse: " + masterChief.getWarehouseCount("CPU") +"\n";
-		str += "Amount of Graphics Card in Warehouse: " + masterChief.getWarehouseCount("Graphics Card") + "\n";
-		str += "Amount of Motherboard in Warehouse: " + masterChief.getWarehouseCount("Motherboard") + "\n";
-		str += "Amount of Cache in Warehouse: " + masterChief.getWarehouseCount("Cache") + "\n\n";
-		
-		str += "\nREPORT:\n";
-		str += "Amount of RAM in Factory line: " + customer.getItemCounts("RAM") + "\n";
-		str += "Amount of CPU in Factory line: " + customer.getItemCounts("CPU") +"\n";
-		str += "Amount of Graphics Card in Factory line: " + customer.getItemCounts("Graphics Card") + "\n";
-		str += "Amount of Motherboard in Factory line: " + customer.getItemCounts("Motherboard") + "\n";
-		str += "Amount of Cache in Factory line: " + customer.getItemCounts("Cache") + "\n\n";
+		str += "Amount of RAM in RAM Warehouse: " + masterChief.getWarehouseCount("RAM") + "\n";
+		str += "Amount of CPU in CPU Warehouse: " + masterChief.getWarehouseCount("CPU") +"\n";
+		str += "Amount of Graphics Card in Graphics Card Warehouse: " + masterChief.getWarehouseCount("Graphics Card") + "\n";
+		str += "Amount of Motherboard in Motherboard Warehouse: " + masterChief.getWarehouseCount("Motherboard") + "\n";
+		str += "Amount of Cache in Cache Warehouse: " + masterChief.getWarehouseCount("Cache") + "\n\n";
+
+		str += "Amount of RAM Sold: " + customer.getItemCounts("RAM") + "\n";
+		str += "Amount of CPU Sold: " + customer.getItemCounts("CPU") +"\n";
+		str += "Amount of Graphics Card Sold: " + customer.getItemCounts("Graphics Card") + "\n";
+		str += "Amount of Motherboard Sold: " + customer.getItemCounts("Motherboard") + "\n";
+		str += "Amount of Cache Sold: " + customer.getItemCounts("Cache") + "\n\n";
 		return str;
 	}
 	
