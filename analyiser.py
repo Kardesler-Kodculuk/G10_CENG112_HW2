@@ -4,6 +4,7 @@
 from typing import Dict, Tuple
 import re
 
+
 class Queue:
     """
     Queue class is a basic implementation of the Data
@@ -171,11 +172,13 @@ class Test:
                 if storage_addition.is_empty():
                     if result != "FAIL":
                         fail = True
+                        if __name__ != "__main__":
+                            return str(len(storage_addition)), component_mentions
                         print("FAILURE IN STORAGE CHIEF: Nonexistent element")
                         break
                 else:
                     if component != storage_addition.next_item:
-                        return str(len(storage_addition)), component_mentions
+
                         print("Error at the line:", line)
                         print("Returned:", component)
                         print("Expected:", storage_addition.next_item)
@@ -193,6 +196,8 @@ class Test:
             elif factory_component == "Customer":
                 if counts[component] >= 1:
                     if result != "SUCCESS":
+                        if __name__ != "__main__":
+                            return str(len(storage_addition)), component_mentions
                         fail = True
                         print("Error at the line:", line)
                         print("Customer got:", component)
@@ -203,46 +208,46 @@ class Test:
                         component_sold_counts[component] += 1
                 else:
                     if result != "FAIL":
+                        if __name__ != "__main__":
+                            return str(len(storage_addition)), component_mentions
                         fail = True
                         print("Error at the line:", line)
                         print("FAILURE IN CUSTOMER: Wrong reaction - Expected FAIL, got SUCCESS instead.")
                         break
 
-        for line in report:
-            if line == "":
-                continue
-            components = line.split(":")
-            count = int(components[1])
-            if not components[0].endswith("Sold"):
-                component = re.search(r"\w+(?=\s(in)\b)", line).group(0)
-                factory_simulation = re.search(r"\w+(?=(:))", line).group(0)
-                if factory_simulation == "line":
-                    if component == "Card":
-                        component = "Graphics Card"
-                    check = count == storage_addition.count(component)
-                    if not check:
-                        print("Comp")
+        if not fail:
+            for line in report:
+                if line == "":
+                    continue
+                components = line.split(":")
+                count = int(components[1])
+                if not components[0].endswith("Sold"):
+                    component = re.search(r"\w+(?=\s(in)\b)", line).group(0)
+                    factory_simulation = re.search(r"\w+(?=(:))", line).group(0)
+                    if factory_simulation == "line":
+                        factory_simulation = "Factory Line"
+                        if component == "Card":
+                            component = "Graphics Card"
+                        check = count == storage_addition.count(component)
+                    else:
+                        if component == "Card":
+                            component = "Graphics Card"
+                        check = count == counts[component]
                 else:
+                    factory_simulation = "Customer"
+                    component = re.search(r"\w+(?=\s(Sold)\b)", line).group(0)
                     if component == "Card":
                         component = "Graphics Card"
-                    check = count == counts[component]
-                    if not check:
-                        print("Stor")
-                        print(counts)
-                        print(component)
-                        print(counts[component])
-                        print(count)
-            else:
-                component = re.search(r"\w+(?=\s(Sold)\b)", line).group(0)
-                if component == "Card":
-                    component = "Graphics Card"
-                check = count == component_sold_counts[component]
+                    check = count == component_sold_counts[component]
                 if not check:
-                    print("Lol.")
-            if not check:
-                print("REPORT ERR.")
-                return str(len(storage_addition)), component_mentions
-
+                    print("Error at the Report for component {} at factory division {}".format(
+                        factory_component,
+                        factory_simulation
+                    ))
+                    if __name__ != "__main__":
+                        return str(len(storage_addition)), component_mentions
+                    fail = True
+                    break
 
         if fail:
             print("ERRORS DETECTED IN SYSTEM")
@@ -250,7 +255,6 @@ class Test:
         else:
             print("SUCCESSFUL INTEGRATION TESTING")
             return None
-
 
 
 if __name__ == "__main__":
