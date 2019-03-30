@@ -20,7 +20,9 @@ public interface IProduct {
 	 */
 	public String getType();
 	/**
-	 * Set the state of the object.
+	 * Set the state of the product
+	 * @param state - either "", "manufactured", "sold" or "stored".
+	 * @return true if valid, false if not.
 	 */
 	public boolean setState(String state);
 }

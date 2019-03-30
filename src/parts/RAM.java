@@ -51,11 +51,7 @@ public class RAM implements IProduct {
 		return this.type;
 	}
 	
-	/**
-	 * Set the state of the product
-	 * @param state - either "", "manufactured", "sold" or "stored".
-	 * @return true if valid, false if not.
-	 */
+	@Override
 	public boolean setState(String state) {
 		isInitalised();
 		if (isValidState(state)) {
