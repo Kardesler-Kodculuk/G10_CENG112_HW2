@@ -35,7 +35,6 @@ public class ArrayQueue<T> implements IQueue<T> {
 				newQueue[i] = queue[frontIndex % queue.length];
 				frontIndex++;
 			}
-
 			queue = newQueue;
 			frontIndex = 0; // setting frontIndex for expanded queue
 			backIndex = queue.length - 12; // setting backIndex for expanded queue
@@ -48,8 +47,6 @@ public class ArrayQueue<T> implements IQueue<T> {
 		ensureCapacity();
 		backIndex = (backIndex + 1) % queue.length;
 		queue[backIndex] = newEntry;
-
-		
 	}
 
 	@Override
@@ -87,7 +84,6 @@ public class ArrayQueue<T> implements IQueue<T> {
 
 	@Override
 	public void clear() {
-
 		while(queue[frontIndex] != null)
 		{
 			deQueue();
@@ -100,13 +96,4 @@ public class ArrayQueue<T> implements IQueue<T> {
 		return tempLength;
 	}
 	
-//	public IProduct[] getArray() {
-//		IProduct[] tempArray = new IProduct[getLength()];
-//		for(int i = 0; i < getLength(); i++)
-//		{
-//			tempArray[i] = (IProduct) deQueue();
-//		}
-//		return tempArray;
-//	}
-
 }
