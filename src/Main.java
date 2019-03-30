@@ -27,7 +27,7 @@ public class Main {
 		Scanner userInput = new Scanner(System.in);
 		int simulationSize = -1;
 		while (simulationSize <= 0) {
-			System.out.println("Please enter an integer bigger than zero: ");
+			System.out.println("Enter the number of random request cycles: ");
 			if (userInput.hasNextInt()) {
 				simulationSize = userInput.nextInt();
 			} else {
@@ -39,11 +39,25 @@ public class Main {
 		
 	}
 	
+	/**
+	 * Generate an example output
+	 * @param outputString - Output's main string, this will append to
+	 * @param addition - Additional information
+	 * @param lineCount - Count of lines to keep count of lines.
+	 * @return
+	 */
 	private static String generateOutput(String outputString, String addition, int lineCount) {
 		outputString += String.valueOf(lineCount) + ". " + addition + "\n";
 		return outputString;
 	}
 	
+	/**
+	 * Generate the report
+	 * @param customer - Customer object.
+	 * @param factory - Factory object.
+	 * @param masterChief - storageChief object.
+	 * @return
+	 */
 	private static String generateReport(Customer customer, IztechPCFactory factory, StorageChief masterChief) {
 		int[] factoryCounts = factory.itemCounts();
 		masterChief.initiliseWarehouseCounts();
@@ -69,13 +83,13 @@ public class Main {
 		return str;
 	}
 	
+	/**
+	 * Main method.
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		int numberOfRequests;
-		if (args.length > 0) {
-			numberOfRequests = Integer.parseInt(args[0]);
-		} else {
-			numberOfRequests = determineSimulationSize();
-		}
+		numberOfRequests = determineSimulationSize();
 		IProduct[] products = {
 				new RAM(),
 				new CPU(),
